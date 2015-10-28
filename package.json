@@ -1,0 +1,36 @@
+{
+  "name": "Sunset",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "npm run build-js & npm run build-css",
+    "build-js": "browserify src/js/index.js -d -t babelify | uglifyjs -m -c > assets/js/bundle.js",
+    "build-css": "stylus -c src/stylus/ -o assets/css/",
+    "watch": "npm run watch-js & npm run watch-css",
+    "watch-js": "watchify --debug src/js/ -d -o assets/js/bundle.js -v -t babelify",
+    "watch-css": "stylus --sourcemap-inline -w src/stylus/ -o assets/css/"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thibaudbe/sunset.git"
+  },
+  "author": "Thibaud B. <contact@thibaudb.com",
+  "license": "MIT",
+  "dependencies": {
+    "abyssa": "^7.2.1",
+    "nprogress": "^0.2.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.4.0",
+    "browserify": "^11.2.0",
+    "envify": "^3.4.0",
+    "stylus": "^0.52.4",
+    "uglify-js": "^2.5.0",
+    "uglifyify": "^3.0.1",
+    "watchify": "^3.4.0"
+  }
+}

@@ -1,0 +1,14 @@
+*.DS_Store
+node_modules
+npm-debug.log
+target/*
+*.iml
+.idea/*
+.idea_modules
+.classpath
+.project
+.history
+.settings
+client/.idea/
+
+*.sublime-workspace
