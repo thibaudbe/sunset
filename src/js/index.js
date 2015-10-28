@@ -1,42 +1,40 @@
-console.log('dat work');
-
 import a from 'abyssa';
-import ajax from './utils/ajax';
+
+import { getHome, getPost, getTag, getAuthor } from './utils/ajax';
 
 
-let router = a.Router({
-  home: a.State('/', {
-    enter: function(params) {
-      console.log('enter home', params.id);
-    },
-    exit: function() {
-      console.log('leave home');
+let Router = a.Router({
+  index: a.State('/', {
+    enter: (params) => {
+      if (!Router.isFirstTransition()) console.log('test');
     }
+    // exit: () => console.log('leave home')
   },{
-    post: a.State(':id', {
-      enter: function(params) {
-        console.log('enter post', params.id);
-        // ajax(params.id, res => res);
-      },
-      exit: function() {
-        console.log('leave post');
+    home: a.State('', {
+      enter: (params) => { 
+        if (!Router.isFirstTransition()) getHome()
       }
+      // exit: () => console.log('leave home')
+    }),
+    post: a.State(':id', {
+      enter: (params) => { 
+        if (!Router.isFirstTransition()) getPost(params.id)
+      }
+      // exit: () => console.log('leave post')
     })
   }),
   tag: a.State('tag/:id', {
-    enter: function(params) {
-      console.log('enter tag', 'tag/'+ params.id);
-    },
-    exit: function() {
-      console.log('leave tag');
+    enter: (params) => { 
+      if (!Router.isFirstTransition()) getTag(params.id)
     }
+    // exit: () => console.log('leave tag')
   }),
   author: a.State('author/:id', {
-    enter: function(params) {
-      console.log('enter author', 'author/'+ params.id);
-    },
-    exit: function() {
-      console.log('leave author');
+    enter: (params) => { 
+      if (!Router.isFirstTransition()) getAuthor(params.id)
     }
+    // exit: () => console.log('leave author')
   })
-}).init();
+});
+
+Router.init();
